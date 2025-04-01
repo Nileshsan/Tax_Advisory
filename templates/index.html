@@ -1,107 +1,220 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tax Advisory System - PBS TaxS</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: linear-gradient(to right, rgb(224, 240, 199), #E5E5BE);
+            color: #333;
+            line-height: 1.6;
+        }
+        a { text-decoration: none; }
+        /* Navbar */
+        .navbar {
+            background-color: #222;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .nav-links, .auth-links { display: flex; gap: 15px; align-items: center; }
+        .nav-links a, .auth-links a {
+            color: white;
+            padding: 5px 10px;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+        .nav-links a:hover, .auth-links a:hover { color: #f4b400; }
+        /* Dropdown for Services */
+        .dropdown { position: relative; }
+        .dropbtn { cursor: pointer; }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            width: 350px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            padding: 10px;
+            z-index: 1000;
+        }
+        .dropdown-content .service-item {
+            padding: 8px 12px;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s;
+        }
+        .dropdown-content .service-item:last-child { border-bottom: none; }
+        .dropdown-content .service-item:hover {
+            background-color: #ffcc00;
+            color: #222;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: slideDown 0.3s ease-in-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .site-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #82df82;
+            transition: color 0.3s ease;
+        }
+        .site-name:hover { color: #ffcc00; }
+        /* Introduction Section */
+        .intro-section {
+            padding: 40px 20px;
+            background-color: #fff;
+        }
+        .intro-text h1 { font-size: 38px; margin-bottom: 20px; }
+        .intro-text p { font-size: 18px; }
+        /* Contact Form */
+        .card { border: none; }
+        .contact-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        /* Services Section */
+        .services-section { padding: 40px 20px; background-color: #f8f9fa; }
+        .services-section h2 { text-align: center; margin-bottom: 30px; font-size: 30px; }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        .service-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        /* FAQ Section */
+        .faq-section { padding: 40px 20px; background-color: #fff; }
+        .faq-section h2 { text-align: center; margin-bottom: 30px; font-size: 30px; }
+        .faq-item { cursor: pointer; border-bottom: 1px solid #ccc; padding: 10px 0; }
+        .faq-answer { display: none; padding: 5px 0 15px 0; }
+        /* Support Section */
+        .support-section {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
 </head>
-
-
 <body>
 
-    <!-- Top Strip -->
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="{% url 'home' %}" class="site-name">PBS TaxWisary</a>
-        
-
+        <a href="#" class="site-name">PBS TaxWisary</a>
         <div class="nav-links">
-            <a href="{% url 'users:base' %}">TAX_AI</a>
-
+            <a href="#">TAX_AI</a>
             <a href="#products">Products</a>
-
-            <!-- Services Dropdown -->
             <div class="dropdown">
-                <a href="#" class="dropbtn">Services</a>
+                <span class="dropbtn">Services</span>
                 <div class="dropdown-content">
-                    <a href="#">Income Tax Filing</a>
-                    <a href="#">Tax Planning</a>
-                    <a href="#">GST Filing</a>
-                    <a href="#">Advance Tax Calculation</a>
-                    <a href="#">Tax Consultancy</a>
-                    <a href="#">ITR Pre-booking</a>
+                    <div class="service-item" title="Ensure timely submission and avoid penalties">Income Tax Filing</div>
+                    <div class="service-item" title="Optimize your tax liability with expert planning">Tax Planning</div>
+                    <div class="service-item" title="Hassle-free GST filing for your business">GST Filing</div>
+                    <div class="service-item" title="Get accurate calculations for advance tax">Advance Tax Calculation</div>
+                    <div class="service-item" title="Professional advice for your tax queries">Tax Consultancy</div>
+                    <div class="service-item" title="Schedule your tax returns in advance">ITR Pre-booking</div>
                 </div>
             </div>
         </div>
-
-        <!-- Login & Register -->
         <div class="auth-links">
-            <a href="{% url 'users:register' %}">Register</a>
-            <a href="{% url 'users:login' %}">Login - {{ user.username }}</a>
+            <a href="#">Register</a>
+            <a href="#">Login</a>
         </div>
     </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <!-- Introduction Section -->
-        <section class="intro-section">
-            <div class="container mt-5">
-                <div class="row align-items-center">
-                    <!-- Left Side: Text Content -->
-                    <div class="col-md-6">
-                        <div class="intro-text">
-                            <h1>Tax Consultancy & Advisory Services</h1>
-                            <p>We provide expert tax advisory services, ensuring compliance and financial efficiency.</p>
-                        </div>
+    <section class="intro-section">
+        <div class="container mt-5">
+            <div class="row align-items-center">
+                <!-- Left Side: Text Content -->
+                <div class="col-md-6">
+                    <div class="intro-text">
+                        <h1>Tax Consultancy & Advisory Services</h1>
+                        <p>We provide expert tax advisory services to ensure compliance and financial efficiency. Whether it's filing, planning, or consultancy, our services are tailored to meet your needs.</p>
                     </div>
-                    
-                    <!-- Right Side: Contact Form -->
-                    <div class="col-md-6">
-                        <div class="card shadow-lg p-4">
-                            <h3 class="text-center mb-4">Enter Your Details So We Can Contact You</h3>
-                            <form>
-                                <div class="mb-3">
-                                    <label class="form-label">Name:</label>
-                                    <input type="text" class="form-control" placeholder="Enter your name">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Email:</label>
-                                    <input type="email" class="form-control" placeholder="Enter your email">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Contact No.:</label>
-                                    <input type="tel" class="form-control" placeholder="Enter your contact number">
-                                </div>
-                                <button type="submit" class="btn btn-primary w-100">Submit</button>
-                            </form>
-                        </div>
+                </div>
+                <!-- Right Side: Contact Form -->
+                <div class="col-md-6">
+                    <div class="card shadow-lg p-4">
+                        <h3 class="text-center mb-4">Contact Us</h3>
+                        <form onsubmit="return validateForm()">
+                            <div class="mb-3">
+                                <label class="form-label">Name:</label>
+                                <input type="text" id="name" class="form-control" placeholder="Enter your name">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email:</label>
+                                <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Contact No.:</label>
+                                <input type="tel" id="contact" class="form-control" placeholder="Enter your contact number">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+        </div>
+    </section>
 
     <!-- Services Section -->
     <section id="services" class="services-section">
         <h2>Our Services</h2>
         <div class="services-grid">
-            <div class="service-box"><h3>Advance Tax Calculation</h3></div>
-            <div class="service-box"><h3>Tax Saving on Salary Income</h3></div>
-            <div class="service-box"><h3>Responding to IT Notices</h3></div>
-            <div class="service-box"><h3>Pre-book ITR Filing</h3></div>
+            <div class="service-box">
+                <h3>Income Tax Filing</h3>
+                <p>Ensure timely filing and compliance while avoiding penalties with our expert support.</p>
+            </div>
+            <div class="service-box">
+                <h3>Tax Planning</h3>
+                <p>Strategize your finances with effective planning to optimize your tax liability.</p>
+            </div>
+            <div class="service-box">
+                <h3>GST Filing</h3>
+                <p>Experience hassle-free GST filing customized for your business needs.</p>
+            </div>
+            <div class="service-box">
+                <h3>Advance Tax Calculation</h3>
+                <p>Receive accurate and timely calculations to keep your advance tax in check.</p>
+            </div>
+            <div class="service-box">
+                <h3>Tax Consultancy</h3>
+                <p>Benefit from professional advice on resolving your complex tax issues.</p>
+            </div>
+            <div class="service-box">
+                <h3>ITR Pre-booking</h3>
+                <p>Plan ahead and book your Income Tax Returns to secure your future appointments.</p>
+            </div>
         </div>
     </section>
 
@@ -110,15 +223,50 @@
         <h2>Frequently Asked Questions</h2>
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFAQ(this)">What documents are required for tax filing?</div>
-            <div class="faq-answer">Income statements, investment proofs, and tax documents.</div>
+            <div class="faq-answer">You will need your income statements, proof of investments, and other relevant tax documents.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">How do I prepare for tax planning?</div>
+            <div class="faq-answer">Start by gathering your financial records and consult our experts for personalized advice.</div>
         </div>
     </section>
 
     <!-- Support Section -->
     <section id="support" class="support-section">
-        <p>Need support? Call us at +1-800-123-4567 or email <a href="mailto:support@pbstaxs.com">support@pbstaxs.com</a></p>
+        <p>Need support? Call us at +1-800-123-4567 or email <a href="mailto:support@pbstaxs.com" style="color:#ffcc00;">support@pbstaxs.com</a></p>
     </section>
 
-    <script src="{% static 'js/script.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // FAQ Toggle Function
+        function toggleFAQ(element) {
+            var answer = element.nextElementSibling;
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Form Validation
+        function validateForm() {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var contact = document.getElementById('contact').value;
+            if (name.length < 3) {
+                alert("Name must be at least 3 characters long.");
+                return false;
+            }
+            if (!email.includes("@")) {
+                alert("Enter a valid email address.");
+                return false;
+            }
+            if (contact.length !== 10 || isNaN(contact)) {
+                alert("Enter a valid 10-digit contact number.");
+                return false;
+            }
+            alert("Form submitted successfully!");
+            return true;
+        }
+    </script>
 </body>
 </html>
+
+
