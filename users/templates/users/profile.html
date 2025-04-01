@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile - Tax Advisory</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="w-full bg-gray-800 p-4 flex justify-between items-center text-white">
+    <div class="text-xl font-bold">
+      <a href="{% url 'home' %}">Tax Advisory</a>
+    </div>
+    <div class="space-x-4">
+      <a href="{% url 'home' %}" class="hover:text-gray-300">Home</a>
+      <a href="{% url 'logout' %}" class="hover:text-gray-300">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Profile Container -->
+  <div class="max-w-md mx-auto mt-12 bg-white rounded-xl shadow-lg overflow-hidden">
+    <div class="flex justify-center mt-8">
+      <img class="h-24 w-24 rounded-full object-cover border-4 border-gray-200"
+        src="{% if user.profile.profile_pic %}{{ user.profile.profile_pic.url }}{% else %}https://via.placeholder.com/100{% endif %}" 
+        alt="Profile Picture">
+    </div>
+    <div class="p-8">
+      <!-- Display Full Name if available otherwise fallback to username -->
+      <h2 class="text-center text-2xl font-semibold text-gray-800">
+        {% if user.profile.full_name %}{{ user.profile.full_name }}{% else %}{{ user.username }}{% endif %}
+      </h2>
+      <div class="mt-4 space-y-2">
+        <p class="flex justify-between">
+          <span class="font-medium text-gray-600">Email:</span>
+          <span class="text-gray-700">{{ user.email }}</span>
+        </p>
+        <p class="flex justify-between">
+          <span class="font-medium text-gray-600">Phone:</span>
+          <span class="text-gray-700">{{ user.profile.phone }}</span>
+        </p>
+        <p class="flex justify-between">
+          <span class="font-medium text-gray-600">Date of Birth:</span>
+          <span class="text-gray-700">{{ user.profile.dob }}</span>
+        </p>
+        <p class="flex justify-between">
+          <span class="font-medium text-gray-600">Address:</span>
+          <span class="text-gray-700">{{ user.profile.address }}</span>
+        </p>
+        <p class="flex justify-between">
+          <span class="font-medium text-gray-600">Tax ID:</span>
+          <span class="text-gray-700">{{ user.profile.tax_id }}</span>
+        </p>
+        <p class="flex justify-between">
+          <span class="font-medium text-gray-600">Member Since:</span>
+          <span class="text-gray-700">{{ user.date_joined|date:"M d, Y" }}</span>
+        </p>
+      </div>
+      <div class="mt-6 flex justify-around">
+        <button onclick="location.href='{% url 'edit_profile' %}'" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+          Edit Profile
+        </button>
+        <button onclick="location.href='{% url 'change_password' %}'" class="bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700">
+          Change Password
+        </button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+
+
