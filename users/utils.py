@@ -1,5 +1,4 @@
 import re
-import torch
 from io import BytesIO
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import get_template
