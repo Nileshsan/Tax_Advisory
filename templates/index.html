@@ -129,9 +129,9 @@
 
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="#" class="site-name">PBS TaxWisary</a>
+        <a href="{% url 'home' %}" class="site-name">PBS TaxWisary</a>
         <div class="nav-links">
-            <a href="#">TAX_AI</a>
+            <a href="{% url 'users:base' %}">TAX_AI</a>
             <a href="#products">Products</a>
             <div class="dropdown">
                 <span class="dropbtn">Services</span>
@@ -146,8 +146,8 @@
             </div>
         </div>
         <div class="auth-links">
-            <a href="#">Register</a>
-            <a href="#">Login</a>
+            <a href="{% url 'users:register' %}">Register</a>
+            <a href="{% url 'users:login' %}">Login</a>
         </div>
     </nav>
 
