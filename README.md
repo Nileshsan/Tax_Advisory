@@ -10,18 +10,7 @@ The Tax Advisory System is a web application designed to provide users with expe
 - **FAQ Section**: Users can toggle to view answers to common tax-related questions.
 - **Responsive Design**: The application is optimized for both desktop and mobile devices.
 
-## Setup Instructions
-1. **Clone the Repository**: 
-   ```bash
-   git clone https://github.com/yourusername/tax-advisory-system.git
-   ```
-2. **Navigate to the Project Directory**:
-   ```bash
-   cd tax-advisory-system
-   ```
-3. **Open `index.html`**: You can open the `index.html` file in any web browser to view the application.
 
-## Usage Guidelines
 - Fill out the contact form with your name, email, and contact number to get in touch with our tax advisors.
 - Explore the services offered to understand how we can assist you with your tax needs.
 - Check the FAQ section for quick answers to common questions.
@@ -30,6 +19,9 @@ The Tax Advisory System is a web application designed to provide users with expe
 - HTML
 - CSS (Bootstrap)
 - JavaScript
+- Python (Django)
+- LLM
+- POSTGRESQL
 
 ## Contact
 For any inquiries or support, please reach out to us at:
